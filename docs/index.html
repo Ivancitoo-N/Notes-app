@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App Pro - Simplicidad en tus Notas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3b82f6;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f172a;
+                --text: #f8fafc;
+                --muted: #94a3b8;
+            }
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.05em;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: var(--muted);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+        }
+
+        .showcase {
+            background: linear-gradient(135deg, var(--primary), #9333ea);
+            padding: 2rem;
+            border-radius: 20px;
+            margin-bottom: 4rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .showcase-content {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            text-align: left;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .feature-card {
+                background: rgba(255, 255, 255, 0.02);
+                border-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Notes App Pro</h1>
+        <p class="subtitle">La herramienta definitiva para capturar tus ideas con elegancia y velocidad.</p>
+
+        <div class="showcase">
+            <div class="showcase-content">
+                <h2 style="margin-top:0">Simplicidad en cada línea.</h2>
+                <p>Esta aplicación ha sido diseñada enfocándose en lo que importa: tus pensamientos. Con tecnología
+                    <b>Next.js 15</b> y <b>Prisma</b>, garantizamos una velocidad de carga instantánea y una seguridad
+                    de datos profesional.</p>
+                <div style="margin-top: 2rem;">
+                    <a href="https://github.com/Ivancitoo-N" class="btn">Explorar en GitHub</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>⚡ Rendimiento Next-Gen</h3>
+                <p>Aprovechando Server Actions y optimización de renderizado para una experiencia sin esperas.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🔒 Datos Estructurados</h3>
+                <p>Gestión mediante Prisma ORM que asegura la integridad de cada una de tus notas.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🎨 Diseño Atractivo</h3>
+                <p>Interfaz limpia con Tailwind CSS que se adapta a tus ojos gracias al modo oscuro nativo.</p>
+            </div>
+        </div>
+
+        <footer style="margin-top: 6rem; color: var(--muted); font-size: 0.9rem;">
+            Construido con ❤️ por Ivancitoo-N • 2024
+        </footer>
+    </div>
+</body>
+
+</html>
