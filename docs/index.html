@@ -4,148 +4,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notes App Pro - Simplicidad en tus Notas</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Notes App Pro - Tu Cerebro Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono&display=swap"
+        rel="stylesheet">
     <style>
         :root {
-            --primary: #3b82f6;
-            --bg: #ffffff;
-            --text: #1f2937;
-            --muted: #6b7280;
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --bg: #0f172a;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --glass: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #0f172a;
-                --text: #f8fafc;
-                --muted: #94a3b8;
-            }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
             background-color: var(--bg);
             color: var(--text);
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            line-height: 1.5;
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
+        /* --- Animations --- */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
 
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.05em;
-        }
+            50% {
+                transform: translateY(-20px);
+            }
 
-        .subtitle {
-            font-size: 1.5rem;
-            color: var(--muted);
-            max-width: 700px;
-            margin: 0 auto 3rem;
-        }
-
-        .showcase {
-            background: linear-gradient(135deg, var(--primary), #9333ea);
-            padding: 2rem;
-            border-radius: 20px;
-            margin-bottom: 4rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        .showcase-content {
-            background: var(--bg);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: left;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
-        .feature-card {
-            padding: 2rem;
-            background: rgba(0, 0, 0, 0.02);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            border-radius: 16px;
-            text-align: left;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .feature-card {
-                background: rgba(255, 255, 255, 0.02);
-                border-color: rgba(255, 255, 255, 0.05);
+            100% {
+                transform: translateY(0px);
             }
         }
 
-        .feature-card h3 {
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 10% 10%, rgba(99, 102, 241, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(168, 85, 247, 0.15) 0%, transparent 40%);
+            z-index: -1;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .badge {
+            background: rgba(99, 102, 241, 0.1);
             color: var(--primary);
-            margin-bottom: 1rem;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.2);
+        }
+
+        h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            letter-spacing: -3px;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            font-size: 1.4rem;
+            color: var(--muted);
+            max-width: 650px;
+            margin-bottom: 3rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
         }
 
         .btn {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            text-decoration: none;
+            padding: 16px 32px;
+            border-radius: 14px;
             font-weight: 600;
-            display: inline-block;
-            transition: opacity 0.2s;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .btn:hover {
-            opacity: 0.9;
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 35px -5px rgba(99, 102, 241, 0.5);
+        }
+
+        section {
+            padding: 100px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            border-radius: 28px;
+            backdrop-filter: blur(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .feature-list li {
+            color: var(--muted);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- Groups Highlight --- */
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.1));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 40px;
+            padding: 4rem;
+            margin-top: 4rem;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .highlight-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        footer {
+            padding: 4rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            color: var(--muted);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .highlight-box {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+    <div class="bg-gradient"></div>
+
+    <header>
+        <div class="badge">SISTEMA DE PRODUCTIVIDAD PRO</div>
         <h1>Notes App Pro</h1>
-        <p class="subtitle">La herramienta definitiva para capturar tus ideas con elegancia y velocidad.</p>
+        <p class="hero-desc">Organiza tu caos creativo. Una experiencia de escritura minimalista impulsada por Next.js
+            15 y Prisma.</p>
+        <div class="btn-group">
+            <a href="https://github.com/Ivancitoo-N/Notes-app" class="btn btn-primary">Obtener en GitHub</a>
+            <a href="#features" class="btn btn-secondary">Ver Características</a>
+        </div>
+    </header>
 
-        <div class="showcase">
-            <div class="showcase-content">
-                <h2 style="margin-top:0">Simplicidad en cada línea.</h2>
-                <p>Esta aplicación ha sido diseñada enfocándose en lo que importa: tus pensamientos. Con tecnología
-                    <b>Next.js 15</b> y <b>Prisma</b>, garantizamos una velocidad de carga instantánea y una seguridad
-                    de datos profesional.</p>
-                <div style="margin-top: 2rem;">
-                    <a href="https://github.com/Ivancitoo-N" class="btn">Explorar en GitHub</a>
-                </div>
+    <section id="features">
+        <div class="grid">
+            <div class="card">
+                <span class="icon">📁</span>
+                <h3>Organización Total</h3>
+                <p>No más notas perdidas. Agrupa tus ideas por proyectos o categorías de forma intuitiva.</p>
+                <ul class="feature-list">
+                    <li>Crea grupos ilimitados</li>
+                    <li>Asigna notas a grupos específicos</li>
+                    <li>Filtra visualmente tu contenido</li>
+                </ul>
+            </div>
+            <div class="card">
+                <span class="icon">⚡</span>
+                <h3>Velocidad Real-Time</h3>
+                <p>Construida con Server Actions de Next.js para que tus cambios se guarden al instante sin recargas.
+                </p>
+                <ul class="feature-list">
+                    <li>Carga optimizada de fuentes</li>
+                    <li>Navegación fluida entre páginas</li>
+                    <li>Arquitectura App Router moderna</li>
+                </ul>
+            </div>
+            <div class="card">
+                <span class="icon">💎</span>
+                <h3>Diseño Minimalista</h3>
+                <p>Interfaz libre de distracciones con un modo oscuro que cuida tu vista durante la noche.</p>
+                <ul class="feature-list">
+                    <li>Tipografía premium (Geist/Outfit)</li>
+                    <li>Estética Glassmorphism</li>
+                    <li>Responsive: Móvil, Tablet y PC</li>
+                </ul>
             </div>
         </div>
 
-        <div class="features">
-            <div class="feature-card">
-                <h3>⚡ Rendimiento Next-Gen</h3>
-                <p>Aprovechando Server Actions y optimización de renderizado para una experiencia sin esperas.</p>
-            </div>
-            <div class="feature-card">
-                <h3>🔒 Datos Estructurados</h3>
-                <p>Gestión mediante Prisma ORM que asegura la integridad de cada una de tus notas.</p>
-            </div>
-            <div class="feature-card">
-                <h3>🎨 Diseño Atractivo</h3>
-                <p>Interfaz limpia con Tailwind CSS que se adapta a tus ojos gracias al modo oscuro nativo.</p>
+        <div class="highlight-box">
+            <div style="font-size: 5rem; animation: float 4s ease-in-out infinite;">🗂️</div>
+            <div class="highlight-text">
+                <h2>El poder de los Grupos</h2>
+                <p>Nuestra aplicación utiliza un sistema de relaciones inteligente mediante Prisma. Puedes crear grupos
+                    temáticos (Trabajo, Personal, Proyectos) y enlazar cada nota a su lugar correspondiente. Mantén tu
+                    flujo de trabajo estructurado y encuentra lo que buscas en milisegundos.</p>
             </div>
         </div>
+    </section>
 
-        <footer style="margin-top: 6rem; color: var(--muted); font-size: 0.9rem;">
-            Construido con ❤️ por Ivancitoo-N • 2024
-        </footer>
-    </div>
+    <footer>
+        <p>© 2024 Notes App Pro • Desarrollado por Ivancitoo-N</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
