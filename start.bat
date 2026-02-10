@@ -10,11 +10,11 @@ if not exist "node_modules\" (
 )
 
 echo [2/4] Preparando base de datos...
+:: Genera el cliente de Prisma para que el código reconozca las tablas
 call npx prisma generate
-if not exist "dev.db" (
-    echo [INFO] Creando base de datos inicial...
-    call npx prisma migrate dev --name init
-)
+:: Sincroniza el esquema con la base de datos de forma automática (sin preguntas)
+echo [INFO] Sincronizando tablas...
+call npx prisma db push --skip-generate
 
 echo [3/4] Limpiando procesos antiguos...
 taskkill /F /IM node.exe /T 2>nul

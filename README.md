@@ -34,9 +34,9 @@ git clone https://github.com/Ivancitoo-N/Notes-app.git && cd Notes-app && start.
    npm install
    ```
 3. **Configuración de Base de Datos**:
-   Ejecuta las migraciones de Prisma para preparar la base de datos local:
+   Ejecuta el siguiente comando para preparar la base de datos local y generar el cliente:
    ```bash
-   npx prisma migrate dev --name init
+   npx prisma db push
    ```
 4. **Ejecución**:
    Inicia el servidor de desarrollo:
