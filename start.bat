@@ -9,15 +9,13 @@ if not exist "node_modules\" (
     call npm install
 )
 
-echo [2/4] Preparando base de datos...
-:: Genera el cliente de Prisma para que el código reconozca las tablas
-call npx prisma generate
-:: Sincroniza el esquema con la base de datos de forma automática (sin preguntas)
-echo [INFO] Sincronizando tablas...
-call npx prisma db push --skip-generate
-
-echo [3/4] Limpiando procesos antiguos...
+echo [3/4] Preparando base de datos...
+:: Matamos procesos que puedan estar bloqueando la DB
 taskkill /F /IM node.exe /T 2>nul
+:: Genera el cliente y sincroniza las tablas forzosamente
+call npx prisma generate
+echo [INFO] Sincronizando tablas...
+call npx prisma db push --accept-data-loss --skip-generate
 
 echo [4/4] Iniciando NotasApp...
 start http://localhost:3000
