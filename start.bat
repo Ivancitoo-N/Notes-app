@@ -17,7 +17,7 @@ if exist "src\generated\client\" rmdir /s /q "src\generated\client"
 :: Genera el cliente de forma limpia y sincroniza las tablas
 call node node_modules\prisma\build\index.js generate
 echo [INFO] Sincronizando tablas...
-call node node_modules\prisma\build\index.js db push --accept-data-loss --skip-generate
+call node node_modules\prisma\build\index.js db push --accept-data-loss
 
 echo [4/4] Iniciando NotasApp...
 start http://localhost:3000
