@@ -19,10 +19,17 @@ Una aplicación de notas moderna, rápida y minimalista construida con **Next.js
 - **Base de Datos**: Prisma ORM con SQLite
 - **Iconografía**: Lucide React / Heroicons
 
-## 🚀 Instalación y Desarrollo Local
+## 🚀 Super Instalación (Un solo comando)
 
-1. **Requisitos**: Tener instalado **Node.js 18+**.
-2. **Instalación de dependencias**:
+Copia y pega esto en tu terminal (CMD o PowerShell) para clonar y arrancar el proyecto al instante:
+
+```bash
+git clone https://github.com/Ivancitoo-N/Notes-app.git && cd Notes-app && start.bat
+```
+
+---
+
+## 🛠 Instalación Paso a Paso (Manual)
    ```bash
    npm install
    ```
