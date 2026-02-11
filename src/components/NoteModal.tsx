@@ -83,9 +83,25 @@ export default function NoteModal({ note, isOpen, onClose, groups, defaultGroupI
                             onChange={(e) => setGroupId(e.target.value || undefined)}
                         >
                             <option value="">Sin grupo</option>
-                            {groups.map(g => (
-                                <option key={g.id} value={g.id}>{g.name}</option>
-                            ))}
+                            {(() => {
+                                const buildOptions = (items: any[], level = 0): React.ReactNode[] => {
+                                    const options: React.ReactNode[] = [];
+                                    items.forEach(g => {
+                                        options.push(
+                                            <option key={g.id} value={g.id}>
+                                                {"\u00A0".repeat(level * 4)}{g.name}
+                                            </option>
+                                        );
+                                        const children = groups.filter(child => child.parentId === g.id);
+                                        if (children.length > 0) {
+                                            options.push(...buildOptions(children, level + 1));
+                                        }
+                                    });
+                                    return options;
+                                };
+                                const roots = groups.filter(g => !g.parentId);
+                                return buildOptions(roots);
+                            })()}
                         </select>
                     </div>
 

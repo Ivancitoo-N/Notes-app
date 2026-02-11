@@ -42,11 +42,16 @@ export async function getNotes(groupId?: string) {
 }
 
 // GROUP ACTIONS
-export async function createGroup(name: string) {
+export async function createGroup(name: string, parentId?: string) {
     const existing = await db.group.findUnique({ where: { name } });
     if (existing) return existing;
 
-    const group = await db.group.create({ data: { name } });
+    const group = await db.group.create({
+        data: {
+            name,
+            parentId: parentId || null
+        }
+    });
     revalidatePath('/');
     return group;
 }
@@ -69,7 +74,10 @@ export async function deleteGroup(id: string) {
 
 export async function getGroups() {
     return await db.group.findMany({
-        include: { _count: { select: { notes: true } } },
+        include: {
+            _count: { select: { notes: true } },
+            children: true
+        },
         orderBy: { name: 'asc' },
     });
 }

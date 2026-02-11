@@ -11,9 +11,12 @@ datasource db {
 }
 
 model Group {
-  id    String @id @default(cuid())
-  name  String @unique
-  notes Note[]
+  id        String   @id @default(cuid())
+  name      String   @unique
+  parentId  String?
+  parent    Group?   @relation("GroupToGroup", fields: [parentId], references: [id], onDelete: Cascade)
+  children  Group[]  @relation("GroupToGroup")
+  notes     Note[]
 }
 
 model Note {
@@ -23,5 +26,5 @@ model Note {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   groupId   String?
-  group     Group?   @relation(fields: [groupId], references: [id])
+  group     Group?   @relation(fields: [groupId], references: [id], onDelete: Cascade)
 }
